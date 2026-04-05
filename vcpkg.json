@@ -1,0 +1,10 @@
+{
+  "name": "desktop-watcher",
+  "version": "0.1.0",
+  "dependencies": [
+    "fmt",
+    "sqlite3",
+    "tomlplusplus",
+    "cli11"
+  ]
+}

@@ -1,0 +1,6 @@
+build/
+vcpkg_installed/
+.cache/
+*.o
+*.so
+*.a

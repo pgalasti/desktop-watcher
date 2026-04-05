@@ -1,0 +1,27 @@
+[daemon]
+poll_interval_ms = 1000         # How often to check the active window
+idle_threshold_s = 300          # Seconds of inactivity before pausing tracking
+db_path = ""                    # Leave empty to use the XDG default location
+
+[display]
+time_format = "24h"             # "12h" | "24h"
+week_starts = "monday"          # "monday" | "sunday"
+
+[rules]
+[[rules.entry]]
+pattern    = "firefox|chromium|brave"
+match_field = "app_name"
+category   = "browsing"
+priority   = 10
+
+[[rules.entry]]
+pattern    = "vim|nvim|code|jetbrains|alacritty"
+match_field = "app_name"
+category   = "coding"
+priority   = 10
+
+[[rules.entry]]
+pattern    = "steam|lutris"
+match_field = "app_name"
+category   = "gaming"
+priority   = 10
