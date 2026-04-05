@@ -38,7 +38,7 @@ static void TestWindowTitleMatch() {
 
     WindowInfo info;
     info.m_AppName     = "firefox";
-    info.m_WindowTitle = "anthropics/claude — GitHub - Firefox";
+    info.m_WindowTitle = "pgalasti g-lib — github.com - Firefox";
     assert(c.Categorize(info) == "browsing");
 
     info.m_WindowTitle = "Hacker News";

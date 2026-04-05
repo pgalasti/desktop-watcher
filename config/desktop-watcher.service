@@ -5,7 +5,7 @@ PartOf=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/desktop-watcherd
+ExecStart=%h/.local/bin/desktop-watcherd start --foreground
 Restart=on-failure
 RestartSec=5
 

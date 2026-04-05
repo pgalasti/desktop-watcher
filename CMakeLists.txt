@@ -25,6 +25,7 @@ add_library(libdwatcher STATIC
     src/core/categorizer.cpp
     src/platform/x11_window.cpp
     src/platform/gnome_wayland.cpp
+    src/daemon/daemon_control.cpp
 )
 
 set_target_properties(libdwatcher PROPERTIES OUTPUT_NAME dwatcher)
@@ -53,7 +54,7 @@ add_executable(desktop-watcherd
     src/daemon/idle.cpp
 )
 
-target_link_libraries(desktop-watcherd PRIVATE libdwatcher)
+target_link_libraries(desktop-watcherd PRIVATE libdwatcher CLI11::CLI11)
 
 add_custom_command(TARGET desktop-watcherd POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E create_symlink desktop-watcherd dwd
@@ -77,7 +78,7 @@ add_custom_command(TARGET desktop-watcher POST_BUILD
 # ── Tests ────────────────────────────────────────────────────────────────────
 enable_testing()
 
-foreach(TEST_NAME test_db test_categorizer test_config)
+foreach(TEST_NAME test_db test_categorizer test_config test_daemon_control)
     add_executable(${TEST_NAME} tests/${TEST_NAME}.cpp)
     target_link_libraries(${TEST_NAME} PRIVATE libdwatcher)
     add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
