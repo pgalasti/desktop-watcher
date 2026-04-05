@@ -72,16 +72,38 @@ The database is stored at `~/.local/share/desktop-watcher/desktop-watcher.db` by
 
 ## Running
 
-```
-./build/dwd       # run daemon in foreground (Ctrl-C to stop)
-./build/dw status # check what's currently being tracked
+### Manual (foreground)
+
+```bash
+./build/dwd start --foreground   # run in the foreground — Ctrl-C to stop
 ```
 
-For background operation, install the systemd unit:
+### Background daemon
 
+```bash
+./build/dwd start    # fork to background, write PID file
+./build/dwd status   # show whether the daemon is running (exit 0 = running)
+./build/dwd stop     # send SIGTERM and wait for clean shutdown
 ```
+
+The PID lock file is written to `$XDG_RUNTIME_DIR/desktop-watcherd.pid` (typically `/run/user/$UID/desktop-watcherd.pid`).
+
+### systemd (recommended)
+
+```bash
 mkdir -p ~/.local/bin
 cp build/desktop-watcherd ~/.local/bin/
 cp build/desktop-watcher  ~/.local/bin/
-systemctl --user enable --now "$(pwd)/config/desktop-watcher.service"
+
+# Install and start the unit
+mkdir -p ~/.config/systemd/user
+cp config/desktop-watcher.service ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now desktop-watcher
+```
+
+Check logs:
+
+```bash
+journalctl --user -u desktop-watcher -f
 ```
